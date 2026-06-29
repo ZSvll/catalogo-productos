@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catálogo de Productos</title>
+    <title>Catálogo de Productos | Ver todos los productos</title>
+    <meta name="description" content="Explora nuestro catálogo completo de productos. Filtra por categoría y encuentra lo que buscas." />
 
     <script>
       (function () {
@@ -13,8 +14,6 @@
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
-
-    <!-- CSS crítico inline: pinta el fondo correcto antes de que cargue el resto del CSS -->
     <style>
       html[data-theme='dark'] { background-color: #121212; color: #f0f0f0; }
       html[data-theme='light'] { background-color: #ffffff; color: #1a1a1a; }
@@ -22,6 +21,6 @@
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/catalogo-entry.js"></script>
   </body>
 </html>

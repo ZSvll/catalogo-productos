@@ -1,0 +1,82 @@
+/* src/styles/base/variables.css */
+/* Sistema de diseño centralizado: todos los demás archivos CSS consumen estas variables.
+   Cambiar un valor aquí actualiza todo el sitio. */
+
+:root {
+  /* === Colores: Modo claro (default) === */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f5f6f8;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #5c5c5c;
+  --color-border: #e0e0e0;
+
+  /* Color de marca: ajusta estos 3 para rebrandear todo el sitio */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-contrast: #ffffff;
+
+  /* Estados semánticos */
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --color-warning: #d97706;
+
+  /* === Tipografía === */
+  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+  /* clamp(mínimo, preferido-relativo-a-viewport, máximo): tipografía fluida sin media queries */
+  --font-size-sm: clamp(0.8rem, 0.75vw + 0.6rem, 0.9rem);
+  --font-size-base: clamp(1rem, 0.5vw + 0.85rem, 1.125rem);
+  --font-size-lg: clamp(1.25rem, 1vw + 1rem, 1.5rem);
+  --font-size-xl: clamp(1.75rem, 2vw + 1.25rem, 2.5rem);
+  --font-size-2xl: clamp(2.25rem, 3vw + 1.5rem, 3.5rem);
+
+  /* === Espaciado: escala consistente (múltiplos de 4px) === */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+
+  /* === Bordes y sombras === */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+  /* === Layout === */
+  --max-width: 1200px;
+  --header-height: 70px;
+
+  /* === Transiciones === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
+
+/* === Colores: Modo oscuro === */
+/* Se activa cuando <html data-theme="dark"> */
+[data-theme='dark'] {
+  --color-bg: #121212;
+  --color-bg-secondary: #1e1e1e;
+  --color-text: #f0f0f0;
+  --color-text-secondary: #a8a8a8;
+  --color-border: #2e2e2e;
+
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Respeta usuarios que prefieren menos animación (accesibilidad / vestibular) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

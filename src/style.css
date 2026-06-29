@@ -1,0 +1,8 @@
+@import './styles/base/variables.css';
+@import './styles/base/reset.css';
+@import './styles/components/navbar.css';
+@import './styles/components/footer.css';
+@import './styles/components/carousel.css';
+@import './styles/components/product-card.css';
+@import './styles/pages/home.css';
+@import './styles/pages/catalog.css';
