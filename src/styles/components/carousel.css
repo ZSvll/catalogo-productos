@@ -84,3 +84,19 @@
 .carousel__dot--active {
   background: #fff;
 }
+
+@media (max-width: 768px) {
+  .carousel__caption h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .carousel__caption p {
+    font-size: var(--font-size-sm);
+  }
+
+  .carousel__arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}

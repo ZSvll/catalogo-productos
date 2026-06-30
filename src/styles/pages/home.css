@@ -23,3 +23,14 @@
 .state-text--error {
   color: var(--color-danger);
 }
+
+@media (max-width: 768px) {
+  .featured-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .section-title {
+    font-size: var(--font-size-lg);
+  }
+}

@@ -1,6 +1,8 @@
 import { getFeaturedProducts } from '../services/productService.js';
 import { renderProductCard } from '../components/productCard.js';
 import { buildCarouselMarkup, initCarousel } from '../components/carousel.js';
+import { renderContactForm, attachContactFormEvents } from '../components/contactForm.js';
+
 
 // Slides temporales: reemplaza estas imágenes por las reales cuando tengas branding propio
 const heroSlides = [
@@ -32,12 +34,14 @@ export async function initHome(containerSelector) {
         <p class="state-text">Cargando productos...</p>
       </div>
     </section>
+    ${renderContactForm()}
   `;
 
   document.getElementById('hero-carousel').innerHTML = buildCarouselMarkup(heroSlides);
   initCarousel('#hero-carousel');
 
   await loadFeaturedProducts();
+  attachContactFormEvents();
 }
 
 async function loadFeaturedProducts() {

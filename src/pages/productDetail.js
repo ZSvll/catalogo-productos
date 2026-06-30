@@ -1,5 +1,6 @@
 import { getProductById } from '../services/productService.js';
 import { formatPrice } from '../utils/formatPrice.js';
+import { buildWhatsAppLink } from '../utils/whatsapp.js';
 
 export async function initProductDetail(containerSelector) {
   const main = document.querySelector(containerSelector);
@@ -120,8 +121,18 @@ function buildDetailHTML(product) {
             <h2 class="product-info__desc-title">Descripción</h2>
             <p>${product.description || 'Sin descripción disponible.'}</p>
           </div>
+          
+            <a href="${buildWhatsAppLink(`Hola, estoy interesado en el producto "${product.name}" (código: ${product.code || 'N/A'}). ¿Podrían darme más información?`)}"
+            class="whatsapp-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Consultar este producto por WhatsApp"
+          >
+            💬 Consultar por WhatsApp
+          </a>
 
           ${createdAt ? `<p class="product-info__date">Publicado el ${createdAt}</p>` : ''}
+
         </div>
       </div>
     </div>

@@ -25,32 +25,41 @@ export async function initCatalog(containerSelector) {
       <div class="catalog-layout">
         <!-- Sidebar de filtros -->
         <aside class="catalog-sidebar" id="catalog-sidebar">
-          <div class="filter-group">
-            <label for="search-input" class="filter-label">Buscar</label>
-            <input
-              type="search"
-              id="search-input"
-              class="filter-input"
-              placeholder="Nombre del producto..."
-              aria-label="Buscar productos"
-            />
-          </div>
-          <div class="filter-group">
-            <p class="filter-label">Categoría</p>
-            <div class="category-list" id="category-list">
-              <button class="category-btn category-btn--active" data-slug="">Todas</button>
+          <button class="sidebar-toggle" id="sidebar-toggle"aria-expanded="false">
+            ☰ Filtros y búsqueda
+          </button>
+
+          <div class="sidebar-content" id="sidebar-content">
+            <div class="filter-group">
+              <label for="search-input" class="filter-label">Buscar</label>
+              <input type="search" id="search-input" class="filter-input" placeholder="Nombre del producto..." aria-label="Buscar productos"/>
             </div>
+
+            <div class="filter-group">
+              <p class="filter-label">Categoría</p>
+              <div class="category-list" id="category-list">
+                <button class="category-btn category-btn--active" data-slug="">Todas</button>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label for="sort-select" class="filter-label">
+                Ordenar por
+              </label>
+              <select id="sort-select" class="filter-input">
+                <option value="newest">Más recientes</option>
+                <option value="price-asc">Precio: menor a mayor</option>
+                <option value="price-desc">Precio: mayor a menor</option>
+                <option value="name-asc">Nombre A→Z</option>
+              </select>
+            </div>
+
+            <button
+              class="btn btn--secondary"
+              id="clear-filters-btn">
+              Limpiar filtros
+            </button>
           </div>
-          <div class="filter-group">
-            <label for="sort-select" class="filter-label">Ordenar por</label>
-            <select id="sort-select" class="filter-input">
-              <option value="newest">Más recientes</option>
-              <option value="price-asc">Precio: menor a mayor</option>
-              <option value="price-desc">Precio: mayor a menor</option>
-              <option value="name-asc">Nombre A→Z</option>
-            </select>
-          </div>
-          <button class="btn btn--secondary" id="clear-filters-btn">Limpiar filtros</button>
         </aside>
 
         <!-- Grid de productos -->
@@ -235,4 +244,15 @@ function attachFilterEvents() {
 
     applyFilters();
   });
+
+  // Toggle del sidebar en móvil
+  const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebarContent = document.getElementById('sidebar-content');
+
+  sidebarToggle?.addEventListener('click', () => {
+  const isOpen = sidebarContent.classList.toggle('sidebar-content--open');
+  sidebarToggle.setAttribute('aria-expanded', String(isOpen));
+  sidebarToggle.textContent = isOpen ? '✕ Cerrar filtros' : '☰ Filtros y búsqueda';
+  });
 }
+

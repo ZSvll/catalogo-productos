@@ -63,3 +63,13 @@
   color: var(--color-primary);
   font-size: var(--font-size-lg);
 }
+
+@media (max-width: 480px) {
+  .product-card__name {
+    font-size: var(--font-size-sm);
+  }
+
+  .product-card__price {
+    font-size: var(--font-size-base);
+  }
+}
