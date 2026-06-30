@@ -16,7 +16,7 @@ export function renderProductCard(product) {
           ${outOfStock ? '<span class="product-card__badge product-card__badge--danger">Sin stock</span>' : ''}
         </div>
         <div class="product-card__body">
-          <span class="product-card__category">${product.category || ''}</span>
+          <span class="product-card__category">${product.categoryName || product.categorySlug || ''}</span>
           <h3 class="product-card__name">${product.name}</h3>
           <p class="product-card__price">${formatPrice(product.price)}</p>
         </div>

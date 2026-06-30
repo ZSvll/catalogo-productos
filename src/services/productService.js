@@ -86,3 +86,22 @@ export async function getProductsPaginated(lastDoc = null) {
     hasMore: snapshot.docs.length === PAGE_SIZE,
   };
 }
+
+/**
+ * Obtiene TODOS los productos activos para filtrado client-side.
+ * Usar solo cuando el catálogo es de tamaño manejable (<= ~500 productos).
+ * @returns {Promise<Array>}
+ */
+export async function getAllActiveProducts() {
+  const productsRef = collection(db, PRODUCTS_COLLECTION);
+  const q = query(
+    productsRef,
+    where('active', '==', true),
+    orderBy('createdAt', 'desc')
+  );
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((docSnap) => ({
+    id: docSnap.id,
+    ...docSnap.data(),
+  }));
+}
