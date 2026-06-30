@@ -17,11 +17,12 @@ export function renderNavbar(activePage = '') {
         <a href="/" class="navbar__logo">Catálogo<span style="color: var(--color-primary)">.</span></a>
 
         <nav class="navbar__links" id="navbar-links" aria-label="Navegación principal">
-          <a href="/" class="navbar__link ${isActive('home')}">Inicio</a>
-          <a href="/catalogo.html" class="navbar__link ${isActive('catalog')}">Catálogo</a>
-          <a href="/#contacto" class="navbar__link ${isActive('contact')}">Contacto</a>
-          <a href="/#faq" class="navbar__link ${isActive('faq')}">FAQ</a>
-        </nav>
+  <a href="/" class="navbar__link ${isActive('home')}">Inicio</a>
+  <a href="/catalogo.html" class="navbar__link ${isActive('catalog')}">Catálogo</a>
+  <a href="/acerca.html" class="navbar__link ${isActive('about')}">Acerca de</a>
+  <a href="/faq.html" class="navbar__link ${isActive('faq')}">FAQ</a>
+  <a href="/#contacto" class="navbar__link ${isActive('contact')}">Contacto</a>
+</nav>
 
         <div style="display: flex; align-items: center; gap: 0.75rem;">
           <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema claro/oscuro">
