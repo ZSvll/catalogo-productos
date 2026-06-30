@@ -2,6 +2,8 @@ import { getFeaturedProducts } from '../services/productService.js';
 import { renderProductCard } from '../components/productCard.js';
 import { buildCarouselMarkup, initCarousel } from '../components/carousel.js';
 import { renderContactForm, attachContactFormEvents } from '../components/contactForm.js';
+import { initScrollAnimations } from '../utils/animations.js';
+
 
 
 // Slides temporales: reemplaza estas imágenes por las reales cuando tengas branding propio
@@ -27,7 +29,7 @@ export async function initHome(containerSelector) {
   const main = document.querySelector(containerSelector);
 
   main.innerHTML = `
-    <section class="hero" id="hero-carousel"></section>
+    <section class="container featured-section animate-on-scroll" class="hero" id="hero-carousel"></section>
     <section class="container featured-section">
       <h2 class="section-title">Productos destacados</h2>
       <div class="featured-grid" id="featured-grid">
@@ -42,7 +44,11 @@ export async function initHome(containerSelector) {
 
   await loadFeaturedProducts();
   attachContactFormEvents();
-}
+  await loadFeaturedProducts();
+  attachContactFormEvents();
+  initScrollAnimations(); 
+  }
+
 
 async function loadFeaturedProducts() {
   const grid = document.getElementById('featured-grid');

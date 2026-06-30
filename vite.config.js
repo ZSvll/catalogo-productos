@@ -12,6 +12,7 @@ export default defineConfig({
         acerca: resolve(__dirname, 'acerca.html'),
         privacidad: resolve(__dirname, 'privacidad.html'),
         terminos: resolve(__dirname, 'terminos.html'),
+        notFound: resolve(__dirname, '404.html'),
       },
     },
   },

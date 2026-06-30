@@ -1,6 +1,7 @@
 import { getProductById } from '../services/productService.js';
 import { formatPrice } from '../utils/formatPrice.js';
 import { buildWhatsAppLink } from '../utils/whatsapp.js';
+import { initScrollAnimations } from '../utils/animations.js';
 
 export async function initProductDetail(containerSelector) {
   const main = document.querySelector(containerSelector);
@@ -30,7 +31,7 @@ export async function initProductDetail(containerSelector) {
   } catch (error) {
     // Producto no encontrado o error de red → redirige a 404
     console.error('Error al cargar el producto:', error);
-    window.location.href = '/404.html';
+    window.location.href = '/404.html'; 
   }
 }
 
@@ -156,3 +157,4 @@ function attachGalleryEvents() {
     });
   });
 }
+initScrollAnimations();

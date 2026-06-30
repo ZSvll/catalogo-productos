@@ -2,6 +2,7 @@ import { getAllActiveProducts } from '../services/productService.js';
 import { getCategories } from '../services/categoryService.js';
 import { renderProductCard } from '../components/productCard.js';
 import { debounce } from '../utils/debounce.js';
+ import { initScrollAnimations } from '../utils/animations.js';
 
 // --- Estado local del catálogo ---
 const state = {
@@ -16,7 +17,7 @@ export async function initCatalog(containerSelector) {
   const main = document.querySelector(containerSelector);
 
   main.innerHTML = `
-    <section class="catalog-page container">
+    <section class="container featured-section animate-on-scroll" class="catalog-page container">
       <div class="catalog-header">
         <h1 class="section-title">Catálogo de productos</h1>
         <p class="catalog-count" id="catalog-count"></p>
@@ -74,6 +75,7 @@ export async function initCatalog(containerSelector) {
   readFiltersFromURL();
   await loadAllData();
   attachFilterEvents();
+  initScrollAnimations();
 }
 
 // --- Carga de datos ---
