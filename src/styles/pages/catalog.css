@@ -215,3 +215,26 @@
     gap: var(--space-md);
   }
 }
+.btn--primary,
+.btn--primary:hover {
+  color: var(--color-primary-contrast) !important;
+}
+
+.btn--secondary,
+.btn--secondary:hover {
+  color: var(--color-text) !important;
+}
+
+.whatsapp-btn,
+.whatsapp-btn:hover {
+  color: #ffffff !important;
+}
+/* Animación de entrada del grid completo al cargar/filtrar */
+.catalog-grid {
+  animation: fadeIn 250ms ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

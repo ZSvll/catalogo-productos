@@ -125,13 +125,9 @@ function buildDetailHTML(product) {
           </div>
           
             <a href="${buildWhatsAppLink(`Hola, estoy interesado en el producto "${product.name}" (código: ${product.code || 'N/A'}). ¿Podrían darme más información?`)}"
-            class="whatsapp-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Consultar este producto por WhatsApp"
-          >
-            💬 Consultar por WhatsApp
-          </a>
+  class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Consultar este producto por WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
+            </a>
 
           ${createdAt ? `<p class="product-info__date">Publicado el ${createdAt}</p>` : ''}
 

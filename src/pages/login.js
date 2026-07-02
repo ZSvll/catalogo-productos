@@ -43,7 +43,7 @@ export async function initLoginPage(containerSelector) {
                 placeholder="••••••••"
               />
               <button type="button" class="password-toggle" id="password-toggle" aria-label="Mostrar contraseña">
-                👁️
+              <i class="fa-regular fa-eye" id="eye-icon"></i>
               </button>
             </div>
             <p class="form-error" id="login-password-error" role="alert"></p>
@@ -71,11 +71,12 @@ function attachLoginEvents() {
   const passwordToggle = document.getElementById('password-toggle');
 
   // Toggle para mostrar/ocultar contraseña
+  const eyeIcon = document.getElementById('eye-icon');
   passwordToggle.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-    passwordToggle.textContent = isPassword ? '🙈' : '👁️';
-  });
+  const isPassword = passwordInput.type === 'password';
+  passwordInput.type = isPassword ? 'text' : 'password';
+  eyeIcon.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+});
 
   // Validar al perder foco
   emailInput.addEventListener('blur', () => validateLoginField('login-email'));

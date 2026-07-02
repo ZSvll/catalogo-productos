@@ -2,7 +2,7 @@ import { getAllActiveProducts } from '../services/productService.js';
 import { getCategories } from '../services/categoryService.js';
 import { renderProductCard } from '../components/productCard.js';
 import { debounce } from '../utils/debounce.js';
- import { initScrollAnimations } from '../utils/animations.js';
+import { initScrollAnimations } from '../utils/animations.js';
 
 // --- Estado local del catálogo ---
 const state = {
@@ -26,8 +26,8 @@ export async function initCatalog(containerSelector) {
       <div class="catalog-layout">
         <!-- Sidebar de filtros -->
         <aside class="catalog-sidebar" id="catalog-sidebar">
-          <button class="sidebar-toggle" id="sidebar-toggle"aria-expanded="false">
-            ☰ Filtros y búsqueda
+          <button class="sidebar-toggle" id="sidebar-toggle" aria-expanded="false">
+          <i class="fa-solid fa-sliders"></i> Filtros y búsqueda
           </button>
 
           <div class="sidebar-content" id="sidebar-content">
@@ -162,7 +162,8 @@ function renderProducts() {
   }
 
   grid.innerHTML = state.filtered.map(renderProductCard).join('');
-}
+  initScrollAnimations();
+};
 
 function renderSkeletons() {
   const grid = document.getElementById('catalog-grid');
@@ -253,8 +254,10 @@ function attachFilterEvents() {
 
   sidebarToggle?.addEventListener('click', () => {
   const isOpen = sidebarContent.classList.toggle('sidebar-content--open');
-  sidebarToggle.setAttribute('aria-expanded', String(isOpen));
-  sidebarToggle.textContent = isOpen ? '✕ Cerrar filtros' : '☰ Filtros y búsqueda';
+  sidebarToggle.textContent = '';
+  sidebarToggle.innerHTML = isOpen
+  ? '<i class="fa-solid fa-xmark"></i> Cerrar filtros'
+  : '<i class="fa-solid fa-sliders"></i> Filtros y búsqueda';
   });
 }
 

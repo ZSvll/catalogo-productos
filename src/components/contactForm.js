@@ -29,38 +29,45 @@ export function renderContactForm() {
 
         <div class="contact-form-wrapper">
           <form id="contact-form" class="contact-form" novalidate>
-            <div class="form-group">
-              <label for="name" class="form-label">Nombre</label>
-              <input type="text" id="name" name="name" class="form-input" autocomplete="name" />
-              <p class="form-error" id="name-error" role="alert"></p>
-            </div>
+  <div class="form-group">
+    <label for="name" class="form-label">
+      <i class="fa-regular fa-user"></i> Nombre
+    </label>
+    <input type="text" id="name" name="name" class="form-input" autocomplete="name" />
+    <p class="form-error" id="name-error" role="alert"></p>
+  </div>
 
-            <div class="form-group">
-              <label for="email" class="form-label">Correo electrónico</label>
-              <input type="email" id="email" name="email" class="form-input" autocomplete="email" />
-              <p class="form-error" id="email-error" role="alert"></p>
-            </div>
+  <div class="form-group">
+    <label for="email" class="form-label">
+      <i class="fa-regular fa-envelope"></i> Correo electrónico
+    </label>
+    <input type="email" id="email" name="email" class="form-input" autocomplete="email" />
+    <p class="form-error" id="email-error" role="alert"></p>
+  </div>
 
-            <div class="form-group">
-              <label for="message" class="form-label">Mensaje</label>
-              <textarea id="message" name="message" class="form-input" rows="5"></textarea>
-              <p class="form-error" id="message-error" role="alert"></p>
-            </div>
+  <div class="form-group">
+    <label for="message" class="form-label">
+      <i class="fa-regular fa-comment"></i> Mensaje
+    </label>
+    <textarea id="message" name="message" class="form-input" rows="5"></textarea>
+    <p class="form-error" id="message-error" role="alert"></p>
+  </div>
 
-            <button type="submit" class="btn btn--primary" id="contact-submit-btn">Enviar mensaje</button>
+  <button type="submit" class="btn btn--primary" id="contact-submit-btn">
+    <i class="fa-solid fa-paper-plane"></i> Enviar mensaje
+  </button>
 
-            <p class="form-feedback" id="form-feedback" role="status"></p>
-          </form>
+  <p class="form-feedback" id="form-feedback" role="status"></p>
+</form>
 
           
            <a href="${buildWhatsAppLink('Hola, tengo una consulta sobre sus productos.')}"
             class="whatsapp-btn"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Contactar por WhatsApp"
-          >
-            💬 Escribir por WhatsApp
-          </a>
+            aria-label="Contactar por WhatsApp"><i class="fa-brands fa-whatsapp"></i>
+            Escribir por WhatsApp
+           </a>
         </div>
 
         <div class="contact-map" id="contact-map">

@@ -31,15 +31,18 @@ export function initFaqPage(containerSelector) {
 
   const main = document.querySelector(containerSelector);
 
-  const itemsHTML = faqData
-    .map(
-      (item) => `
-      <details class="faq-item">
-        <summary class="faq-question">${item.question}</summary>
-        <p class="faq-answer">${item.answer}</p>
-      </details>`
-    )
-    .join('');
+ const itemsHTML = faqData
+  .map(
+    (item) => `
+    <details class="faq-item">
+      <summary class="faq-question">
+        ${item.question}
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </summary>
+      <p class="faq-answer">${item.answer}</p>
+    </details>`
+  )
+  .join('');
 
   main.innerHTML = `
     <section class="container static-page">

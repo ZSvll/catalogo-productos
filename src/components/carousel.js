@@ -29,8 +29,12 @@ export function buildCarouselMarkup(slides) {
   return `
     <div class="carousel" role="region" aria-label="Carrusel de imágenes destacadas">
       <div class="carousel__track">${slidesHTML}</div>
-      <button class="carousel__arrow carousel__arrow--prev" aria-label="Anterior">&#10094;</button>
-      <button class="carousel__arrow carousel__arrow--next" aria-label="Siguiente">&#10095;</button>
+      <button class="carousel__arrow carousel__arrow--prev" aria-label="Anterior">
+      <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="carousel__arrow carousel__arrow--next" aria-label="Siguiente">
+      <i class="fa-solid fa-chevron-right"></i>
+      </button>
       <div class="carousel__dots">${dotsHTML}</div>
     </div>
   `;

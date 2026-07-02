@@ -1,8 +1,9 @@
 .carousel {
   position: relative;
   width: 100%;
-  height: clamp(280px, 50vw, 480px);
+  height: clamp(300px, 50vw, 520px);
   overflow: hidden;
+  background: var(--color-bg-tertiary);
 }
 
 .carousel__track {
@@ -15,7 +16,7 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 600ms ease;
+  transition: opacity 700ms ease;
 }
 
 .carousel__slide--active {
@@ -28,75 +29,112 @@
   object-fit: cover;
 }
 
+/* Overlay sutil para que el caption sea legible */
+.carousel__slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.55) 0%,
+    rgba(0,0,0,0.15) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
 .carousel__caption {
   position: absolute;
-  bottom: var(--space-xl);
-  left: var(--space-lg);
+  bottom: var(--space-2xl);
+  left: var(--space-xl);
+  right: var(--space-xl);
   color: #fff;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  z-index: 1;
   max-width: 600px;
 }
 
 .carousel__caption h2 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   margin-bottom: var(--space-sm);
 }
 
+.carousel__caption p {
+  font-size: var(--font-size-base);
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* Flechas */
 .carousel__arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  border: none;
+  z-index: 2;
   width: 44px;
   height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 50%;
-  font-size: 1.1rem;
-  transition: background var(--transition-fast);
+  color: #fff;
+  font-size: 0.85rem;
+  transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 .carousel__arrow:hover {
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(255,255,255,0.28);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .carousel__arrow--prev { left: var(--space-md); }
 .carousel__arrow--next { right: var(--space-md); }
 
+/* Dots */
 .carousel__dots {
   position: absolute;
   bottom: var(--space-md);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: var(--space-sm);
+  gap: 6px;
+  z-index: 2;
 }
 
 .carousel__dot {
   width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  height: 4px;
+  border-radius: 2px;
   border: none;
-  background: rgba(255, 255, 255, 0.5);
-  transition: background var(--transition-fast);
+  background: rgba(255,255,255,0.4);
+  transition: background var(--transition-fast), width var(--transition-fast);
+  padding: 0;
 }
 
 .carousel__dot--active {
   background: #fff;
+  width: 36px;
 }
 
 @media (max-width: 768px) {
-  .carousel__caption h2 {
-    font-size: var(--font-size-lg);
+  .carousel__caption {
+    bottom: var(--space-xl);
+    left: var(--space-md);
+    right: var(--space-md);
   }
 
-  .carousel__caption p {
-    font-size: var(--font-size-sm);
+  .carousel__caption h2 {
+    font-size: var(--font-size-xl);
   }
 
   .carousel__arrow {
     width: 36px;
     height: 36px;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
   }
 }

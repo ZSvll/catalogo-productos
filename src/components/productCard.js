@@ -18,7 +18,7 @@ export function renderProductCard(product) {
   const outOfStock = Number(product.stock) <= 0;
 
   return `
-    <article class="product-card animate-on-scroll">
+    <article class="product-card">
       <a href="/producto.html?id=${product.id}" class="product-card__link" aria-label="Ver detalles de ${product.name}">
         <div class="product-card__image-wrap">
           <img

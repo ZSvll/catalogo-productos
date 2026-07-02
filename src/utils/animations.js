@@ -1,39 +1,42 @@
-// Anima elementos cuando entran al viewport usando IntersectionObserver.
-// Uso: agrega class="animate-on-scroll" a cualquier elemento HTML,
-// y opcionalmente data-delay="200" para retrasar la animación en ms.
-
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/**
- * Inicializa el observer de animaciones al hacer scroll.
- * Llamar una vez al montar cada página.
- */
-export function initScrollAnimations() {
-  if (prefersReducedMotion) return;
+// Guardamos una referencia al observer para poder desconectarlo y reconectarlo
+let scrollObserver = null;
 
-  const observer = new IntersectionObserver(
+export function initScrollAnimations() {
+  if (prefersReducedMotion) {
+    // Si prefiere menos movimiento, hace todos los elementos visibles directamente
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+
+  // Desconectar el observer anterior si existe
+  if (scrollObserver) {
+    scrollObserver.disconnect();
+  }
+
+  scrollObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-
         const el = entry.target;
         const delay = el.dataset.delay || 0;
-
         setTimeout(() => {
           el.classList.add('is-visible');
         }, Number(delay));
-
-        // Dejar de observar una vez animado (la animación es de una sola vez)
-        observer.unobserve(el);
+        scrollObserver.unobserve(el);
       });
     },
     {
-      threshold: 0.1,     // Se activa cuando el 10% del elemento es visible
-      rootMargin: '0px 0px -40px 0px', // Empieza un poco antes del borde inferior
+      threshold: 0.08,
+      rootMargin: '0px 0px -20px 0px',
     }
   );
 
-  document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-    observer.observe(el);
+  // Solo observa elementos que AÚN no son visibles
+  document.querySelectorAll('.animate-on-scroll:not(.is-visible)').forEach((el) => {
+    scrollObserver.observe(el);
   });
 }

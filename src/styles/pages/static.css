@@ -58,10 +58,7 @@
 }
 
 .faq-question::after {
-  content: '+';
-  font-size: 1.3rem;
-  color: var(--color-primary);
-  transition: transform var(--transition-fast);
+  content: none; /* Eliminamos el + de CSS */
 }
 
 .faq-item[open] .faq-question::after {
@@ -72,4 +69,14 @@
   margin-top: var(--space-sm);
   color: var(--color-text-secondary);
   line-height: 1.7;
+}
+
+.faq-question .faq-icon {
+  color: var(--color-primary);
+  transition: transform var(--transition-fast);
+  font-size: 0.85rem;
+}
+
+.faq-item[open] .faq-question .faq-icon {
+  transform: rotate(180deg);
 }
