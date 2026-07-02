@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tu-dominio.netlify.app/sitemap.xml
+Sitemap: https://momazostipxt.netlify.app/sitemap.xml
