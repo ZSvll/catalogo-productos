@@ -8,9 +8,14 @@ import {
   getDocs,
   doc,
   getDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig.js';
 import { getCached } from '../utils/cache.js';
+import { invalidateCache } from '../utils/cache.js';
 
 const PRODUCTS_COLLECTION = 'products';
 
@@ -109,4 +114,48 @@ export async function getAllActiveProducts() {
       ...docSnap.data(),
     }));
   });
+}
+// Crea un nuevo producto en Firestore.
+export async function createProduct(data) {
+  const productsRef = collection(db, PRODUCTS_COLLECTION);
+  const docRef = await addDoc(productsRef, {
+    ...data,
+    active: true,
+    featured: false,
+    createdAt: serverTimestamp(),
+  });
+  invalidateCache('all-active-products');
+  invalidateCache('featured-products-8');
+  return docRef.id;
+}
+
+// Actualiza un producto existente.
+export async function updateProduct(id, data) {
+  const productRef = doc(db, PRODUCTS_COLLECTION, id);
+  await updateDoc(productRef, {
+    ...data,
+    updatedAt: serverTimestamp(),
+  });
+  invalidateCache('all-active-products');
+  invalidateCache('featured-products-8');
+}
+
+// Elimina un producto permanentemente.
+export async function deleteProduct(id) {
+  const productRef = doc(db, PRODUCTS_COLLECTION, id);
+  await deleteDoc(productRef);
+  invalidateCache('all-active-products');
+  invalidateCache('featured-products-8');
+}
+
+// Obtiene TODOS los productos (activos e inactivos) para el panel admin.
+
+export async function getAllProductsAdmin() {
+  const productsRef = collection(db, PRODUCTS_COLLECTION);
+  const q = query(productsRef, orderBy('createdAt', 'desc'));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((docSnap) => ({
+    id: docSnap.id,
+    ...docSnap.data(),
+  }));
 }
