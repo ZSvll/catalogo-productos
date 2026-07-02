@@ -34,3 +34,15 @@
     font-size: var(--font-size-lg);
   }
 }
+/* El main no debe tener padding propio — cada sección lo maneja */
+#main-content {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* El hero debe ser siempre full-width, ignorando cualquier contenedor padre */
+.hero {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

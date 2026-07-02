@@ -1,9 +1,6 @@
-// Entry point exclusivo de catalogo.html.
-// Mismo patrón que main.js: monta layout + delega contenido a la página.
 import './style.css';
 import { renderNavbar, attachNavbarEvents } from './components/navbar.js';
 import { renderFooter } from './components/footer.js';
-import { initCatalog } from './pages/catalog.js';
 
 const app = document.getElementById('app');
 
@@ -14,4 +11,7 @@ app.innerHTML = `
 `;
 
 attachNavbarEvents();
-initCatalog('#main-content');
+
+import('./pages/catalog.js').then(({ initCatalog }) => {
+  initCatalog('#main-content');
+});

@@ -1,7 +1,6 @@
 import './style.css';
 import { renderNavbar, attachNavbarEvents } from './components/navbar.js';
 import { renderFooter } from './components/footer.js';
-import { initProductDetail } from './pages/productDetail.js';
 
 const app = document.getElementById('app');
 
@@ -12,4 +11,7 @@ app.innerHTML = `
 `;
 
 attachNavbarEvents();
-initProductDetail('#main-content');
+
+import('./pages/productDetail.js').then(({ initProductDetail }) => {
+  initProductDetail('#main-content');
+});

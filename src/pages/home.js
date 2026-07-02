@@ -29,8 +29,8 @@ export async function initHome(containerSelector) {
   const main = document.querySelector(containerSelector);
 
   main.innerHTML = `
-    <section class="container featured-section animate-on-scroll" class="hero" id="hero-carousel"></section>
-    <section class="container featured-section">
+    <section class="hero" id="hero-carousel"></section>
+    <section class="container featured-section animate-on-scroll">
       <h2 class="section-title">Productos destacados</h2>
       <div class="featured-grid" id="featured-grid">
         <p class="state-text">Cargando productos...</p>

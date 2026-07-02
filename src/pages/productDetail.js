@@ -55,7 +55,8 @@ function renderSkeleton(container) {
 
 // --- Construir HTML del detalle ---
 function buildDetailHTML(product) {
-  const images = product.images?.length ? product.images : ['https://via.placeholder.com/600x600?text=Sin+imagen'];
+  const images = (product.images?.length ? product.images : ['https://via.placeholder.com/600x600?text=Sin+imagen'])
+  .map((img) => optimizeCloudinaryUrl(img, 800));
   const inStock = Number(product.stock) > 0;
   const createdAt = product.createdAt?.toDate
     ? new Intl.DateTimeFormat('es-DO', { dateStyle: 'long' }).format(product.createdAt.toDate())
@@ -158,3 +159,8 @@ function attachGalleryEvents() {
   });
 }
 initScrollAnimations();
+
+function optimizeCloudinaryUrl(url, width = 800) {
+  if (!url || !url.includes('res.cloudinary.com')) return url;
+  return url.replace('/upload/', `/upload/w_${width},q_auto,f_auto/`);
+}

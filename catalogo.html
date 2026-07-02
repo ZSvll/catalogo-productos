@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catálogo de Productos | Ver todos los productos</title>
     <meta name="description" content="Explora nuestro catálogo completo de productos. Filtra por categoría y encuentra lo que buscas." />
-
+        <!-- Preconnect: establece conexión con servicios externos ANTES de que se necesiten -->
+    <link rel="preconnect" href="https://firestore.googleapis.com" />
+    <link rel="preconnect" href="https://res.cloudinary.com" />
     <script>
       (function () {
         const savedTheme = localStorage.getItem('theme');

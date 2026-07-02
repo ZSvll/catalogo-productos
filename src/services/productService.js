@@ -10,6 +10,7 @@ import {
   getDoc,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig.js';
+import { getCached } from '../utils/cache.js';
 
 const PRODUCTS_COLLECTION = 'products';
 
@@ -19,20 +20,22 @@ const PRODUCTS_COLLECTION = 'products';
  * @returns {Promise<Array>}
  */
 export async function getFeaturedProducts(maxResults = 8) {
-  const productsRef = collection(db, PRODUCTS_COLLECTION);
-  const q = query(
-    productsRef,
-    where('featured', '==', true),
-    where('active', '==', true),
-    limit(maxResults)
-  );
-
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map((docSnap) => ({
-    id: docSnap.id,
-    ...docSnap.data(),
-  }));
+  return getCached(`featured-products-${maxResults}`, async () => {
+    const productsRef = collection(db, PRODUCTS_COLLECTION);
+    const q = query(
+      productsRef,
+      where('featured', '==', true),
+      where('active', '==', true),
+      limit(maxResults)
+    );
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+  });
 }
+
 
 /**
  * Obtiene un único producto por su ID de documento.
@@ -93,15 +96,17 @@ export async function getProductsPaginated(lastDoc = null) {
  * @returns {Promise<Array>}
  */
 export async function getAllActiveProducts() {
-  const productsRef = collection(db, PRODUCTS_COLLECTION);
-  const q = query(
-    productsRef,
-    where('active', '==', true),
-    orderBy('createdAt', 'desc')
-  );
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map((docSnap) => ({
-    id: docSnap.id,
-    ...docSnap.data(),
-  }));
+  return getCached('all-active-products', async () => {
+    const productsRef = collection(db, PRODUCTS_COLLECTION);
+    const q = query(
+      productsRef,
+      where('active', '==', true),
+      orderBy('createdAt', 'desc')
+    );
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+  });
 }

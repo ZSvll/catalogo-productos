@@ -63,16 +63,11 @@ export function renderContactForm() {
           </a>
         </div>
 
-        <div class="contact-map">
-          <iframe
-            src="https://www.google.com/maps?q=Santo%20Domingo%20Este,%20Rep%C3%BAblica%20Dominicana&output=embed"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Ubicación de la empresa en el mapa"
-          ></iframe>
+        <div class="contact-map" id="contact-map">
+         <div class="map-placeholder">
+           <p>📍 Santo Domingo Este, República Dominicana</p>
+           <button class="btn btn--secondary" id="load-map-btn">Ver en el mapa</button>
+         </div>
         </div>
 
       </div>
@@ -100,6 +95,24 @@ export function attachContactFormEvents() {
   });
 
   form.addEventListener('submit', handleSubmit);
+  
+  // Carga el mapa solo cuando el usuario hace click en "Ver en el mapa"
+const loadMapBtn = document.getElementById('load-map-btn');
+const mapContainer = document.getElementById('contact-map');
+
+loadMapBtn?.addEventListener('click', () => {
+  mapContainer.innerHTML = `
+    <iframe
+      src="https://www.google.com/maps?q=Santo%20Domingo%20Este,%20Rep%C3%BAblica%20Dominicana&output=embed"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Ubicación de la empresa en el mapa"
+    ></iframe>
+  `;
+});
 }
 
 function validateField(field) {

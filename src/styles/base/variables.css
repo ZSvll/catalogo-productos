@@ -11,8 +11,8 @@
   --color-border: #e0e0e0;
 
   /* Color de marca: ajusta estos 3 para rebrandear todo el sitio */
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
+  --color-primary: #1d4ed8;
+  --color-primary-hover: #1e40af;
   --color-primary-contrast: #ffffff;
 
   /* Estados semánticos */
@@ -21,13 +21,7 @@
   --color-warning: #d97706;
 
   /* === Tipografía === */
-  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
-  /* clamp(mínimo, preferido-relativo-a-viewport, máximo): tipografía fluida sin media queries */
-  --font-size-sm: clamp(0.8rem, 0.75vw + 0.6rem, 0.9rem);
-  --font-size-base: clamp(1rem, 0.5vw + 0.85rem, 1.125rem);
-  --font-size-lg: clamp(1.25rem, 1vw + 1rem, 1.5rem);
-  --font-size-xl: clamp(1.75rem, 2vw + 1.25rem, 2.5rem);
-  --font-size-2xl: clamp(2.25rem, 3vw + 1.5rem, 3.5rem);
+--font-base: system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* === Espaciado: escala consistente (múltiplos de 4px) === */
   --space-xs: 0.25rem;

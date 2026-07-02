@@ -1,5 +1,6 @@
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from './firebaseConfig.js';
+import { getCached } from '../utils/cache.js';
 
 const CATEGORIES_COLLECTION = 'categories';
 
@@ -8,11 +9,13 @@ const CATEGORIES_COLLECTION = 'categories';
  * @returns {Promise<Array<{id: string, name: string, slug: string}>>}
  */
 export async function getCategories() {
-  const categoriesRef = collection(db, CATEGORIES_COLLECTION);
-  const q = query(categoriesRef, orderBy('name', 'asc'));
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map((docSnap) => ({
-    id: docSnap.id,
-    ...docSnap.data(),
-  }));
+  return getCached('categories', async () => {
+    const categoriesRef = collection(db, CATEGORIES_COLLECTION);
+    const q = query(categoriesRef, orderBy('name', 'asc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+  });
 }
