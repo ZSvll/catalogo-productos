@@ -6,34 +6,50 @@
  */
 export function buildCarouselMarkup(slides) {
   const slidesHTML = slides
-    .map(
-      (slide, i) => `
-      <div class="carousel__slide ${i === 0 ? 'carousel__slide--active' : ''}" data-index="${i}">
-        <img src="${slide.image}" alt="${slide.title || ''}" class="carousel__image" loading="${i === 0 ? 'eager' : 'lazy'}" />
-        ${
-          slide.title
-            ? `<div class="carousel__caption">
-                <h2>${slide.title}</h2>
-                ${slide.subtitle ? `<p>${slide.subtitle}</p>` : ''}
-              </div>`
-            : ''
-        }
-      </div>`
-    )
+    .map((slide, i) => {
+      const imageTag = `
+        <img
+          src="${slide.image}"
+          alt="${slide.title || ''}"
+          class="carousel__image"
+          loading="${i === 0 ? 'eager' : 'lazy'}"
+          fetchpriority="${i === 0 ? 'high' : 'auto'}"
+        />`;
+
+      // Si el slide tiene link, envuelve la imagen en un <a>
+      const imageContent = slide.link
+        ? `<a href="${slide.link}" class="carousel__slide-link" aria-label="Ver ${slide.title}">${imageTag}</a>`
+        : imageTag;
+
+      return `
+        <div class="carousel__slide ${i === 0 ? 'carousel__slide--active' : ''}" data-index="${i}">
+          ${imageContent}
+          ${slide.title ? `
+            <div class="carousel__caption">
+              <h2>${slide.title}</h2>
+              ${slide.subtitle ? `<p>${slide.subtitle}</p>` : ''}
+            </div>` : ''}
+        </div>`;
+    })
     .join('');
 
   const dotsHTML = slides
-    .map((_, i) => `<button class="carousel__dot ${i === 0 ? 'carousel__dot--active' : ''}" data-go-to="${i}" aria-label="Ir a la diapositiva ${i + 1}"></button>`)
+    .map((_, i) => `
+      <button
+        class="carousel__dot ${i === 0 ? 'carousel__dot--active' : ''}"
+        data-go-to="${i}"
+        aria-label="Ir a la diapositiva ${i + 1}"
+      ></button>`)
     .join('');
 
   return `
-    <div class="carousel" role="region" aria-label="Carrusel de imágenes destacadas">
+    <div class="carousel" role="region" aria-label="Carrusel de productos destacados">
       <div class="carousel__track">${slidesHTML}</div>
       <button class="carousel__arrow carousel__arrow--prev" aria-label="Anterior">
-      <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i>
       </button>
       <button class="carousel__arrow carousel__arrow--next" aria-label="Siguiente">
-      <i class="fa-solid fa-chevron-right"></i>
+        <i class="fa-solid fa-chevron-right"></i>
       </button>
       <div class="carousel__dots">${dotsHTML}</div>
     </div>

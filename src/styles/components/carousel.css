@@ -138,3 +138,21 @@
     font-size: 0.75rem;
   }
 }
+.carousel-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-border) 37%,
+    var(--color-bg-secondary) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+
+.carousel__slide-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
